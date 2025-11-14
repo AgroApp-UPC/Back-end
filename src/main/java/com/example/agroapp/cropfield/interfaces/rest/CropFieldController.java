@@ -136,10 +136,6 @@ public class CropFieldController {
         return ResponseEntity.ok(resources);
     }
 
-    /**
-     * Update a crop field
-     * PUT /api/v1/crop-fields/{id}
-     */
     @Operation(summary = "Update a crop field", description = "Updates all information of an existing crop field")
     @PutMapping("/{id}")
     public ResponseEntity<CropFieldResource> updateCropField(
@@ -159,11 +155,6 @@ public class CropFieldController {
                 ))
                 .orElse(ResponseEntity.notFound().build());
     }
-
-    /**
-     * Update crop field status
-     * PATCH /api/v1/crop-fields/{id}/status
-     */
     @Operation(summary = "Update crop field status", description = "Updates only the status of a crop field")
     @PatchMapping("/{id}/status")
     public ResponseEntity<CropFieldResource> updateCropFieldStatus(
@@ -175,11 +166,6 @@ public class CropFieldController {
                 ))
                 .orElse(ResponseEntity.notFound().build());
     }
-
-    /**
-     * Delete a crop field
-     * DELETE /api/v1/crop-fields/{id}
-     */
     @Operation(summary = "Delete a crop field", description = "Deletes a crop field by ID")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCropField(@PathVariable Long id) {
