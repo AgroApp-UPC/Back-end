@@ -1,0 +1,13 @@
+# Railway ignore file
+# Files and directories to ignore during Railway deployment
+
+.git
+.gitignore
+*.md
+!README.md
+.idea
+*.iml
+target/
+.mvn/wrapper/maven-wrapper.jar
+.env
+*.log
