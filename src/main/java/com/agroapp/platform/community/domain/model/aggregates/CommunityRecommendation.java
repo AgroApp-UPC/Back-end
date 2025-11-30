@@ -1,7 +1,5 @@
 package com.agroapp.platform.community.domain.model.aggregates;
 
-
-
 import com.agroapp.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
 import lombok.Getter;

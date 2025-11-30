@@ -5,7 +5,8 @@ public record SignUpCommand(
         String email,
         String password,
         String phoneNumber,
-        String identificator
+        String identificator,
+        String location
 ) {
 }
 

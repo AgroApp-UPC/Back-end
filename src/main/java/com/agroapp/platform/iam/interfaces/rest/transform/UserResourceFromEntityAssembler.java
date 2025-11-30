@@ -10,7 +10,9 @@ public class UserResourceFromEntityAssembler {
                 user.getUserName(),
                 user.getEmail(),
                 user.getPhoneNumber(),
-                user.getIdentificator()
+                user.getIdentificator(),
+                user.getLocation(),
+                user.isLocationPublic()
         );
     }
 }

@@ -28,6 +28,12 @@ public class User extends AuditableAbstractAggregateRoot<User> {
     @Column(nullable = false, unique = true)
     private String identificator;
 
+    @Column
+    private String location;
+
+    @Column(nullable = false)
+    private boolean isLocationPublic;
+
     /**
      * Default constructor required by JPA.
      */
@@ -42,9 +48,10 @@ public class User extends AuditableAbstractAggregateRoot<User> {
      * @param password User's password (required, min 5 characters - will be hashed)
      * @param phoneNumber User's phone with country prefix (required, format: +XX...)
      * @param identificator User's DNI (required, exactly 8 digits)
+     * @param location User's geographical location (optional)
      * @throws IllegalArgumentException if any validation fails
      */
-    public User(String userName, String email, String password, String phoneNumber, String identificator) {
+    public User(String userName, String email, String password, String phoneNumber, String identificator, String location) {
         // Validate userName
         if (userName == null || userName.trim().isEmpty()) {
             throw new IllegalArgumentException("User name cannot be empty");
@@ -81,6 +88,8 @@ public class User extends AuditableAbstractAggregateRoot<User> {
         this.password = password;
         this.phoneNumber = phoneNumber.trim();
         this.identificator = identificator.trim();
+        this.location = location;
+        this.isLocationPublic = true; // Default: location is public
     }
 
     /**
@@ -90,9 +99,10 @@ public class User extends AuditableAbstractAggregateRoot<User> {
      * @param userName New user name
      * @param email New email
      * @param phoneNumber New phone number
+     * @param isLocationPublic New location privacy setting
      * @return The updated User instance (fluent interface)
      */
-    public User updateProfile(String userName, String email, String phoneNumber) {
+    public User updateProfile(String userName, String email, String phoneNumber, boolean isLocationPublic) {
         // Validate userName
         if (userName == null || userName.trim().isEmpty()) {
             throw new IllegalArgumentException("User name cannot be empty");
@@ -117,6 +127,18 @@ public class User extends AuditableAbstractAggregateRoot<User> {
         this.userName = userName.trim();
         this.email = email.trim().toLowerCase();
         this.phoneNumber = phoneNumber.trim();
+        this.isLocationPublic = isLocationPublic;
+        return this;
+    }
+
+    /**
+     * Toggles the location privacy setting.
+     * Business logic method for changing location visibility.
+     *
+     * @return The updated User instance (fluent interface)
+     */
+    public User toggleLocationPrivacy() {
+        this.isLocationPublic = !this.isLocationPublic;
         return this;
     }
 
